@@ -3,7 +3,8 @@
   import { ref, onMounted } from 'vue'
   import type { Event } from '@/types'
   import EventCardCate from '@/components/EventCardCate.vue';
-  import axios from 'axios';
+  // import axios from 'axios';
+  import EventServices from '@/services/EventServices';
 
   // const events = ref<Event[]>([
   //   {
@@ -43,7 +44,7 @@
   const events = ref<Event[] | null>(null)
 
   onMounted (() => {
-    axios.get('https://my-json-server.typicode.com/PuddingRicecake/SE331-Lab-02-Q14/events')
+    EventServices.getEvents()
     .then((response) => {
       // console.log(response.data)
       events.value = response.data
