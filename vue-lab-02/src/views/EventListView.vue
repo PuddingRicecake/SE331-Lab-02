@@ -1,44 +1,56 @@
 <script setup lang="ts">
   import EventCard from '@/components/EventCard.vue'
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import type { Event } from '@/types'
   import EventCardCate from '@/components/EventCardCate.vue';
+  import axios from 'axios';
 
-  const events = ref<Event[]>([
-    {
-      id: 5928101,
-      category: 'animal welfare',
-      title: 'Cat Adoption Day',
-      description: 'Find your new feline friend at this event.',
-      location: 'Meow Town',
-      date: 'January 28, 2026',
-      time: '12:00',
-      petAllowed: true,
-      organizer: 'Kat Laydee'
-    },
-    {
-      id: 4582797,
-      category: 'animafoodl welfare',
-      title: 'Community Gardening',
-      description: 'Loin us as we tend to the community edible plants.',
-      location: 'Flora Town',
-      date: 'March 14, 2026',
-      time: '10:00',
-      petAllowed: true,
-      organizer: 'Fern Pollin'
-    },
-    {
-      id: 8419988,
-      category: 'sustainability',
-      title: 'Beach Cleaning',
-      description: 'Help pick up trash along the shore.',
-      location: 'Playa Del Carmen',
-      date: 'July 22, 2026',
-      time: '11:00',
-      petAllowed: false,
-      organizer: 'Carey Wales'
-    }
-  ])
+  // const events = ref<Event[]>([
+  //   {
+  //     id: 5928101,
+  //     category: 'animal welfare',
+  //     title: 'Cat Adoption Day',
+  //     description: 'Find your new feline friend at this event.',
+  //     location: 'Meow Town',
+  //     date: 'January 28, 2026',
+  //     time: '12:00',
+  //     petAllowed: true,
+  //     organizer: 'Kat Laydee'
+  //   },
+  //   {
+  //     id: 4582797,
+  //     category: 'animafoodl welfare',
+  //     title: 'Community Gardening',
+  //     description: 'Loin us as we tend to the community edible plants.',
+  //     location: 'Flora Town',
+  //     date: 'March 14, 2026',
+  //     time: '10:00',
+  //     petAllowed: true,
+  //     organizer: 'Fern Pollin'
+  //   },
+  //   {
+  //     id: 8419988,
+  //     category: 'sustainability',
+  //     title: 'Beach Cleaning',
+  //     description: 'Help pick up trash along the shore.',
+  //     location: 'Playa Del Carmen',
+  //     date: 'July 22, 2026',
+  //     time: '11:00',
+  //     petAllowed: false,
+  //     organizer: 'Carey Wales'
+  //   }
+  // ])
+  const events = ref<Event[] | null>(null)
+
+  onMounted (() => {
+    axios.get('https://my-json-server.typicode.com/PuddingRicecake/SE331-Lab-02-Q14/events')
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.error('There was an error!', error)
+    })
+  })
 </script>
 
 <template>
