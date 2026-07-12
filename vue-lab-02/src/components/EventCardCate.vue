@@ -19,9 +19,9 @@
 
 <template>
   <div class="event-class">
-    <div class="event-card">
-      <h2>{{ event.title }}</h2>
-      <span>@{{  event.category }} on {{ event.organizer }}</span>
+    <div class="event-card cate-org">
+      <p>{{  event.category }}</p>
+      <p>{{ event.organizer }}</p>
     </div>
   </div>
 </template>
@@ -42,5 +42,10 @@
 .event-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cate-org {
+    padding-left: 50px;
+    text-align: right;
 }
 </style>
