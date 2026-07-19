@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { type Event } from "@/types";
 import EventServices from "@/services/EventServices";
+import { useRouter } from "vue-router";
 
 const event = ref<Event | null>(null)
 const props = defineProps({
@@ -10,14 +11,19 @@ const props = defineProps({
         required: true
     }
 })
+const router = useRouter()
+
 onMounted(() =>{
     // fetch event (by id) and set local event data
     EventServices.getEvent(Number(props.id))
         .then((response) =>{
             event.value = response.data
         })
-        .catch((error) =>{
-            console.log('There was an error!', error)
+        .catch(() =>{
+            router.push({
+                name: '404-resource-view',
+                params: {resource: 'event'}
+            })
         })
 })
 </script>
